@@ -1,0 +1,66 @@
+# ------------------------------------------
+# PIN Extractor
+# Author: Abdullah
+# Description:
+# Extracts a secret PIN from poems by taking
+# the length of a specific word from each line.
+# ------------------------------------------
+
+def pin_extractor(poems):
+    """
+    Extract secret PINs from a list of poems.
+
+    Each digit in the PIN represents the length
+    of a selected word from each line.
+    """
+
+    secret_codes = []
+
+    # Process each poem
+    for poem in poems:
+        secret_code = ''
+
+        # Split poem into individual lines
+        lines = poem.split('\n')
+
+        # Process each line
+        for line_index, line in enumerate(lines):
+            words = line.split()
+
+            # Check if the required word exists
+            if len(words) > line_index:
+                secret_code += str(len(words[line_index]))
+            else:
+                secret_code += '0'
+
+        secret_codes.append(secret_code)
+
+    return secret_codes
+
+
+# ------------------------------------------
+# Sample Poems
+# ------------------------------------------
+
+poem = """Stars and the moon
+shine in the sky
+white and
+until the end of the night"""
+
+poem2 = """The grass is green
+here and there
+hoping for rain
+before it turns yellow"""
+
+poem3 = """There
+once
+was
+a
+dragon"""
+
+
+# ------------------------------------------
+# Example Usage
+# ------------------------------------------
+
+print(pin_extractor([poem, poem2, poem3]))
